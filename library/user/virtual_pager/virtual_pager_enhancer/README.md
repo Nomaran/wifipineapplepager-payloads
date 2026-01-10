@@ -4,6 +4,13 @@
 
 Virtual Pager Enhancer is a lightweight client-side enhancement for the Virtual Pager web interface that improves both **loot management** and **visual customization**.
 
+## How to use
+
+When running the payload, you can press the **“A”** button to enable or disable the Virtual Pager Enhancer.
+After enabling or disabling the enhancer, press any other button to exit the script.
+
+Once finished, refresh the Virtual Pager web page. If everything worked correctly, you should see new menu items added to the navigation bar.
+
 ## Functionality
 
 
