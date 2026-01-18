@@ -1,4 +1,4 @@
-# Virtual Pager Enhancer - v2.3.1
+# Virtual Pager Enhancer - v2.3.2
 
 ## Overview
 

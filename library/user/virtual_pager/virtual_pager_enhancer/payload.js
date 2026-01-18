@@ -201,6 +201,7 @@ function initLootUI() {
     };
 }
 
+let isUpdatingPayloads = false;
 function initPayloadUpdater() {
     createModal("payloadModal", "Update Payloads", '<div id="payloadUpdateContent" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;"><p style="text-align:center;color:#ccc;margin-bottom:15px;">Update your local payload library from the official repository. <br><br>This will overwrite all your payloads!</p><button id="btnRunUpdate" class="btn-update-info">Update Now</button></div>');
     const ul = document.querySelector("#sidebarnav ul");
@@ -211,9 +212,11 @@ function initPayloadUpdater() {
     document.getElementById("payloadUpdateBtn").onclick = (e) => {
         e.preventDefault();
         showModal("payloadModal");
+        if (isUpdatingPayloads) return;
         const container = document.getElementById("payloadUpdateContent");
         container.innerHTML = '<p style="text-align:center;color:#ccc;margin-bottom:15px;">Update your local payload library from the official repository. <br><br>This will overwrite all your payloads!</p><button id="btnRunUpdate" class="btn-update-info">Update Now</button>';
         document.getElementById("btnRunUpdate").onclick = async () => {
+            isUpdatingPayloads = true;
             container.innerHTML = '<div class="loader"></div><div style="margin-top:15px;color:#aaa;">Updating payloads...</div>';
             const res = await sendServerRequest("updatepayloads", undefined, true, true);
             if (res && res.okay) {
@@ -221,6 +224,7 @@ function initPayloadUpdater() {
             } else {
                 container.innerHTML = `<i class="material-icons" style="font-size:40px;color:#ff5252;margin-bottom:10px;">error</i><div style="color:#fff;">${res?.error || "Update failed"}</div>`;
             }
+            isUpdatingPayloads = false;
         };
     };
 }
