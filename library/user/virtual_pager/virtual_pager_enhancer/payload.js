@@ -215,7 +215,7 @@ function initPayloadUpdater() {
         container.innerHTML = '<p style="text-align:center;color:#ccc;margin-bottom:15px;">Update your local payload library from the official repository. <br><br>This will overwrite all your payloads!</p><button id="btnRunUpdate" class="btn-update-info">Update Now</button>';
         document.getElementById("btnRunUpdate").onclick = async () => {
             container.innerHTML = '<div class="loader"></div><div style="margin-top:15px;color:#aaa;">Updating payloads...</div>';
-            const res = await sendServerRequest("update_payloads", undefined, true, true);
+            const res = await sendServerRequest("updatepayloads", undefined, true, true);
             if (res && res.okay) {
                 container.innerHTML = `<i class="material-icons" style="font-size:40px;color:#00ffaa;margin-bottom:10px;">check_circle</i><div style="color:#fff;">${res.message}</div>`;
             } else {
