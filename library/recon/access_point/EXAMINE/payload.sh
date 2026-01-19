@@ -4,6 +4,7 @@
 # Author:      Septumus
 # Version:     1.0
 
+LOG ""
 LOG green "A (GREEN) - EXAMINE ALL CHANNELS AND BSSID (DEFAULT)"
 LOG ""
 LOG blue "UP - EXAMINE TARGET AP CHANNEL"
@@ -16,7 +17,6 @@ LOG orange "LEFT - EXAMINE BSSID OF YOUR CHOICE"
 LOG ""
 LOG red "B (RED) - EXIT"
 LOG ""
-LOG ""
 
 button=$(WAIT_FOR_INPUT)
 
@@ -28,7 +28,7 @@ case ${button} in
         LOG ""
         ;;
     "UP")
-       channel="$_RECON_SELECTED_AP_CHANNEL"
+       channel=$_RECON_SELECTED_AP_CHANNEL
        PROMPT "Cancel time entry to keep your channel selection until you reset it."
 	seconds=$(NUMBER_PICKER "Seconds to monitor: " 7)
         LOG "CHANGING TO CHANNEL $channel..."
@@ -44,7 +44,7 @@ case ${button} in
         LOG ""        
         ;;
     "DOWN")
-        bssid="${_RECON_SELECTED_AP_BSSID}"
+        bssid=$_RECON_SELECTED_AP_BSSID
         PROMPT "Cancel time entry to keep your BSSID selection until you reset it."
 	seconds=$(NUMBER_PICKER "Seconds to monitor: " 7)
         LOG "CHANGING TO CHANNEL $_RECON_SELECTED_AP_SSID at $bssid..."
