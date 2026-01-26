@@ -4,12 +4,25 @@
 # DESCRIPTION Looks at the most recent Wigle.csv file and counts the amount of auth types and estimated distance traveled
 
 # Check is Python is installed
+user_confirmed() {
+    [ "$1" = "true" ] || [ "$1" = "$DUCKYSCRIPT_USER_CONFIRMED" ]
+}
 
 if ! command -v python3 >/dev/null 2>&1; then
-  LOG "ERROR: python3 is not installed. Install with: opkg install python3"
-  exit 1
+  LOG "red" "ERROR: python3 required."
+    resp=$(CONFIRMATION_DIALOG "Install python3?")
+    if user_confirmed "$resp"; then
+        LOG "cyan" "Installing python3..."
+        opkg update >/dev/null 2>&1
+        if ! opkg install python3; then
+            LOG "red" "Install failed!"
+            exit 1
+        fi
+    else
+        LOG "red" "Python3 is required"
+        exit 1
+    fi
 fi
-
 # Get the latest CSV file, skipped the first two rows.
 wigle=$(ls -t /root/loot/wigle/*.csv 2>/dev/null | head -n 1)
 
